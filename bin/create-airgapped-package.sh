@@ -44,8 +44,8 @@ if ! command -v docker &> /dev/null; then
     exit 1
 fi
 
-# Check if docker-compose is available
-if ! command -v docker-compose &> /dev/null; then
+# Check if `docker compose` is available
+if ! command -v `docker compose` &> /dev/null; then
     echo -e "${RED}ERROR: Docker Compose is not installed or not in PATH${NC}"
     exit 1
 fi
@@ -65,7 +65,7 @@ fi
 echo ""
 echo -e "${GREEN}Step 1: Building all Docker images...${NC}"
 echo "This may take several minutes..."
-docker-compose build --no-cache
+`docker compose build` --no-cache
 
 # Step 2: Create directories
 echo ""
@@ -167,7 +167,7 @@ echo ""
 echo "Next steps:"
 echo "  1. cd scoringengine"
 echo "  2. Edit bin/competition.yaml with your competition setup"
-echo "  3. docker-compose up -d"
+echo "  3. docker compose up -d"
 echo ""
 EOF
 
@@ -221,22 +221,22 @@ MANAGEMENT COMMANDS:
 --------------------
 
 View status:
-  docker-compose ps
+  docker compose ps
 
 View logs:
-  docker-compose logs -f
+  docker compose logs -f
 
 Stop engine (pause competition):
-  docker-compose stop engine
+  docker compose stop engine
 
 Start engine (resume competition):
-  docker-compose start engine
+  docker compose start engine
 
 Stop all services:
-  docker-compose down
+  docker compose down
 
 Restart all services:
-  docker-compose restart
+  docker compose restart
 
 IMPORTANT SECURITY NOTES:
 -------------------------
