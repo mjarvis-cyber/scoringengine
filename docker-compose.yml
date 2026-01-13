@@ -34,7 +34,7 @@ services:
     # ports:
     #   - 3306:3306
   nginx:
-    image: nginx:1.23.1
+    image: mjarvy/scoring-engine-nginx
     depends_on:
       web:
         condition: service_healthy
@@ -47,29 +47,10 @@ services:
       timeout: 3s
       retries: 10
     restart: on-failure
-    volumes:
-      - ./docker/nginx/files/web.conf:/etc/nginx/conf.d/default.conf
-      - ./docker/nginx/files/scoringengine.crt:/etc/nginx/scoringengine.crt
-      - ./docker/nginx/files/scoringengine.key:/etc/nginx/scoringengine.key
-      - ./scoring_engine/web/static/:/usr/share/nginx/html/static/
     networks:
       - default
-  base:
-    image: scoringengine/base
-    build:
-      context: .
-      dockerfile: ./docker/base/Dockerfile
-      cache_from:
-        - scoringengine/base
-        - base:latest
   bootstrap:
-    image: scoringengine/bootstrap
-    build:
-      context: .
-      dockerfile: ./docker/bootstrap/Dockerfile
-      cache_from:
-        - scoringengine/bootstrap
-        - bootstrap:latest
+    image: mjarvy/scoring-engine-bootstrap
     depends_on:
       base:
         condition: service_started
@@ -83,13 +64,7 @@ services:
       - SCORINGENGINE_OVERWRITE_DB
       - SCORINGENGINE_VERSION
   engine:
-    image: scoringengine/engine
-    build:
-      context: .
-      dockerfile: ./docker/engine/Dockerfile
-      cache_from:
-        - scoringengine/engine
-        - engine:latest
+    image: mjarvy/scoring-engine-engine
     depends_on:
       base:
         condition: service_started
@@ -104,13 +79,7 @@ services:
       - SCORINGENGINE_EXAMPLE
       - SCORINGENGINE_VERSION
   worker:
-    image: scoringengine/worker
-    build:
-      context: .
-      dockerfile: ./docker/worker/Dockerfile
-      cache_from:
-        - scoringengine/worker
-        - worker:latest
+    image: mjarvy/scoring-engine-worker
     depends_on:
       base:
         condition: service_started
@@ -124,13 +93,7 @@ services:
       - DISPLAY=:1
     privileged: true
   web:
-    image: scoringengine/web
-    build:
-      context: .
-      dockerfile: ./docker/web/Dockerfile
-      cache_from:
-        - scoringengine/web
-        - web:latest
+    image: mjarvy/scoring-engine-web
     depends_on:
       base:
         condition: service_started

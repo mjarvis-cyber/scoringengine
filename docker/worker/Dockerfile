@@ -1,4 +1,4 @@
-FROM scoringengine/base
+FROM mjarvy/scoring-engine-base
 
 USER root
 

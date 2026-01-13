@@ -8,6 +8,15 @@ Scoring Engine is an open-source platform for running Red/White/Blue team compet
 
 ![Scoring Engine screenshot](https://github.com/scoringengine/scoringengine/blob/master/docs/source/images/screenshots.gif)
 
+## Why forked?
+- I ended up in an airgapped environment where the proxies do not allow packages from microsoft no matter how hard you try.
+
+## Build
+- Set your HTTP_PROXY, HTTPS_PROXY, and NOPROXY in ./docker-bake.hcl, if needed.
+- Run `docker buildx bake base-local`
+- Run `docker buildx bake local`
+- Run `docker compose up -d`
+
 ## Features
 
 - Automated scheduling and execution of service checks

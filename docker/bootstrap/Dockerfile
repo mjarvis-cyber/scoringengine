@@ -1,4 +1,4 @@
-FROM scoringengine/base
+FROM mjarvy/scoring-engine-base
 
 COPY bin/setup /app/bin/setup
 COPY bin/competition.yaml /app/bin/competition.yaml

@@ -1,5 +1,15 @@
 FROM python:3.14.1-slim-bookworm
 
+ARG HTTP_PROXY
+ARG HTTPS_PROXY
+ARG NO_PROXY
+ENV HTTP_PROXY=${HTTP_PROXY}
+ENV HTTPS_PROXY=${HTTPS_PROXY}
+ENV NO_PROXY=${NO_PROXY}
+
+RUN echo 'Acquire::http::proxy \"${HTTP_PROXY}\";' > /etc/apt/apt.conf.d/proxy.conf && \
+  echo 'Acquire::https::proxy \"${HTTP_PROXY}\";' >> /etc/apt/apt.conf.d/proxy.conf
+
 RUN set -eux; \
   useradd -m engine; \
   apt-get update; \
