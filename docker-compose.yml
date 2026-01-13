@@ -52,8 +52,6 @@ services:
   bootstrap:
     image: mjarvy/scoring-engine-bootstrap
     depends_on:
-      base:
-        condition: service_started
       mysql:
         condition: service_healthy
     restart: on-failure
@@ -66,8 +64,6 @@ services:
   engine:
     image: mjarvy/scoring-engine-engine
     depends_on:
-      base:
-        condition: service_started
       redis:
         condition: service_healthy
       bootstrap:
@@ -81,8 +77,6 @@ services:
   worker:
     image: mjarvy/scoring-engine-worker
     depends_on:
-      base:
-        condition: service_started
       redis:
         condition: service_healthy
     restart: unless-stopped
@@ -95,8 +89,6 @@ services:
   web:
     image: mjarvy/scoring-engine-web
     depends_on:
-      base:
-        condition: service_started
       mysql:
         condition: service_healthy
       bootstrap:

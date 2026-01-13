@@ -171,5 +171,5 @@ group "local" {
 }
 
 group "release" {
-    targets = [ "base-release", "bootstrap-release", "engine-local", "nginx-release", "web-release", "worker-release" ]
+    targets = [ "base-release", "bootstrap-release", "engine-release", "nginx-release", "web-release", "worker-release" ]
 }
