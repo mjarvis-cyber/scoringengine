@@ -65,7 +65,7 @@ fi
 echo ""
 echo -e "${GREEN}Step 1: Building all Docker images...${NC}"
 echo "This may take several minutes..."
-`docker compose build` --no-cache
+docker compose build --no-cache
 
 # Step 2: Create directories
 echo ""
